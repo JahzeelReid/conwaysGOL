@@ -81,6 +81,7 @@ def find8(data, x, y):
     else:
         ring[2] = [x+1, y-1]
     #right
+    #left
 
 def main():
     width = 500
