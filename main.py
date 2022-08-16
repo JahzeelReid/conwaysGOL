@@ -70,7 +70,6 @@ def find8(data, x, y):
         ring[1] = [x, 19]
     else:
         ring[1] = [x, y-1]
-
     #topright
     if x == 19 and y == (0):
         ring[2] = [0,  19]
@@ -81,7 +80,11 @@ def find8(data, x, y):
     else:
         ring[2] = [x+1, y-1]
     #right
-    #left
+    if x == 19:
+        ring[3] = [0, y]
+    else:
+        ring[3] = [x+1, y]
+    
 
 def main():
     width = 500
