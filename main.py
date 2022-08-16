@@ -186,6 +186,7 @@ def main():
 
     turn = 0
     while flag:
+        pygame.event.get()
         turn += 1
         print(turn)
         clock.tick(10)
