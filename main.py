@@ -225,8 +225,8 @@ def main():
         print(turn)
         clock.tick(10)
         redraw(width, rows, surface, data)
-        pygame.time.delay(300)
-        if len(data.printcell()) == 0 or turn == 150:
+        pygame.time.delay(100)
+        if len(data.printcell()) == 0:
             break
         deadoralive(data)
 
