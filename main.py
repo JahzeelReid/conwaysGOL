@@ -157,7 +157,8 @@ def deadoralive(data):
 def glider(data, x, y):
     addlist = [[x, y], [x+1, y+1], [x+2, y+1], [x, y+2], [x+1, y+2]]
     for i in range(len(addlist)):
-        data.addcell(addlist[i][0], addlist[i][1])
+        if addlist[i] not in data.printcell():
+            data.addcell(addlist[i][0], addlist[i][1])
 
 
 
@@ -190,7 +191,7 @@ def startup(data, surface, width, rows):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    print("hit")
+                    #print("hit")
                     flag = False
                 elif event.key == pygame.K_SPACE:
                     glide = True
@@ -238,6 +239,9 @@ def main():
 
             if event.type == pygame.QUIT:
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    startup(data, surface, width, rows)
         turn += 1
         print(turn)
         clock.tick(10)
