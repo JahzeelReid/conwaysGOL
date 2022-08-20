@@ -154,16 +154,22 @@ def deadoralive(data):
                     # print(data.printcell())
 
     # print(data.printcell())
+def glider(data, x, y):
+    addlist = [[x, y], [x+1, y+1], [x+2, y+1], [x, y+2], [x+1, y+2]]
+    for i in range(len(addlist)):
+        data.addcell(addlist[i][0], addlist[i][1])
+
 
 
 def startup(data, surface, width, rows):
     size = int(width/rows)
     flag = True
+    glide = False
     while flag:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN and glide == False:
                 px = event.pos[0]
                 px = int(math.floor(px/size))
                 py = event.pos[1]
@@ -173,10 +179,21 @@ def startup(data, surface, width, rows):
                 else:
                     data.addcell(px, py)
                 print(event.pos)
+            elif event.type == pygame.MOUSEBUTTONDOWN and glide == True:
+                px = event.pos[0]
+                px = int(math.floor(px / size))
+                py = event.pos[1]
+                py = int(math.floor(py / size))
+                glider(data, px, py)
+                glide = False
+
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     print("hit")
                     flag = False
+                elif event.key == pygame.K_SPACE:
+                    glide = True
         redraw(width, rows, surface, data)
 
 
@@ -190,17 +207,17 @@ def main():
     data = gol((255, 255, 255))
     data.set(width, rows)
     # data.addcell(19, 19)
-    data.addcell(0, 1)
-    data.addcell(1, 1)
-    data.addcell(2, 1)
+    #data.addcell(0, 1)
+    #data.addcell(1, 1)
+    #data.addcell(2, 1)
 
-    data.addcell(4, 5)
-    data.addcell(4, 6)
-    data.addcell(4, 7)
+    #data.addcell(4, 5)
+    #data.addcell(4, 6)
+    #data.addcell(4, 7)
 
-    data.addcell(30, 4)
-    data.addcell(30, 5)
-    data.addcell(30, 6)
+    #data.addcell(30, 4)
+    #data.addcell(30, 5)
+    #data.addcell(30, 6)
     #print(find8(data.printcell(), 1, 0))
     startup(data, surface, width, rows)
     #data.addcell(19, 0)
