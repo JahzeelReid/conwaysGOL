@@ -53,6 +53,19 @@ def redraw(width, rows, surface, data):
     draw(width, rows, surface, data)
     pygame.display.update()
 
+""" def gliderdraw(width, rows, surface, data, px, py):
+    surface.fill((0, 0, 0))
+    btw = width // rows
+    x = 0
+    y = 0
+    for i in range(rows):
+        x = x + btw
+        y = y + btw
+        pygame.draw.line(surface, (255, 255, 255), (x, 0), (x, w))
+        pygame.draw.line(surface, (255, 255, 255), (0, y), (w, y))
+    data.drawcells(surface) """
+
+
 
 def find8(data, live, x, y):
     ring = [[], [], [], [], [], [], [], []]
@@ -167,6 +180,21 @@ def startup(data, surface, width, rows):
     flag = True
     glide = False
     while flag:
+        if glide == True:
+            #show outline of where the new struc could be 
+            #mahybe in red
+            x = pygame.mouse.get_pos()[0]
+            x = int(math.floor(x/size))
+            y = pygame.mouse.get_pos()[1]
+            y = int(math.floor(y/size))
+            print(x, y)
+            coords = [(x*size, y*size), ((x+1)*size, y*size), ((x+1)*size, (y+1)*size), ((x+3)*size, (y+1)*size), 
+            ((x+3)*size, (y+2)*size), ((x+2)*size, (y+2)*size), ((x+2)*size, (y+3)*size), ((x)*size, (y+3)*size),
+            ((x)*size, (y+2)*size), ((x+1)*size, (y+2)*size), ((x+1)*size, (y+1)*size), ((x)*size, (y+1)*size)] 
+            pygame.draw.lines(surface, (255, 0, 0), True, coords)
+            #pygame.draw.line(surface, (255, 0, 0), (x, y), (x+size, y))
+            pygame.display.update()
+            pass
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -200,8 +228,8 @@ def startup(data, surface, width, rows):
 
 
 def main():
-    width = 500
-    rows = 50
+    width = 600
+    rows = 40
     surface = pygame.display.set_mode((width,width))
     flag = True
     clock = pygame.time.Clock()
